@@ -38,7 +38,7 @@ public class TaskManager {
 
         if (Files.exists(filePath)) {
             try (Scanner scanner = new Scanner(filePath)) {
-                int countTasks = (int) Files.lines(filePath).count();
+                int countTasks = (int) Files.lines(filePath).count();  ////check close /
                 tasks = new String[countTasks][];
                 int counter = 0;
                 while (scanner.hasNextLine()) {
@@ -47,7 +47,7 @@ public class TaskManager {
                 }
             } catch (IOException e) {
                 System.out.print("No file");
-                e.printStackTrace();
+                System.exit(0);
             }
         }
 
@@ -68,7 +68,7 @@ public class TaskManager {
                     removeTask();
                     break;
                 case "list":
-                    list();
+                    printArray(tasks);
                     break;
                 case "exit":
                     saveArrayToFile(tasks, TASKS_FILENAME);
@@ -125,16 +125,16 @@ public class TaskManager {
         }
     }
 
-    private static void list() {
-        StringBuilder tasksList = new StringBuilder();
-        for (int i = 0; i < tasks.length; i++) {
-            tasksList.append(i).append(" : ");
-            for (String s : tasks[i]) {
-                tasksList.append(s).append(" ");
+    public static void printArray(String[][] array) {
+        StringBuilder arraySB = new StringBuilder();
+        for (int i = 0; i < array.length; i++) {
+            arraySB.append(i).append(" : ");
+            for (String s : array[i]) {
+                arraySB.append(s).append(" ");
             }
-            tasksList.append("\n");
+            arraySB.append("\n");
         }
-        System.out.println(tasksList);
+        System.out.println(arraySB);
     }
 
     public static void saveArrayToFile(String[][] array, String fileName) {
