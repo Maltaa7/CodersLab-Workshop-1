@@ -22,7 +22,6 @@ public class TaskManager {
         tasks = loadToArray(TASKS_FILENAME);
         displayOptions(OPTIONS);
         performSelectedActions();
-
     }
 
     public static void displayOptions(String[] arr) {
@@ -155,7 +154,6 @@ public class TaskManager {
             ex.printStackTrace();
         }
     }
-
 
 }
 
