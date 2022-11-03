@@ -2,6 +2,7 @@ package pl.coderslab;
 
 import org.apache.commons.lang3.ArrayUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -33,25 +34,31 @@ public class TaskManager {
 
 
     public static String[][] loadToArray(String filename) {
-        Path filePath = Paths.get(filename);
-        String[][] tasks = null;
+        File file = new File(filename);
+        String[][] tasksArr = null;
 
-        if (Files.exists(filePath)) {
-            try (Scanner scanner = new Scanner(filePath)) {
-                int countTasks = (int) Files.lines(filePath).count();  ////check close /
-                tasks = new String[countTasks][];
-                int counter = 0;
-                while (scanner.hasNextLine()) {
-                    tasks[counter] = scanner.nextLine().split(", ");
-                    counter++;
-                }
-            } catch (IOException e) {
-                System.out.print("No file");
-                System.exit(0);
-            }
+        if (!file.exists()) {
+            System.out.print("No tasks list file!");
+            System.exit(0);
         }
 
-        return tasks;
+
+        try (Scanner scanner = new Scanner(file)) {
+            ArrayList<String> tasksList = new ArrayList<>();
+
+            while (scanner.hasNextLine()) {
+                tasksList.add(scanner.nextLine());
+            }
+
+            tasksArr = new String[tasksList.size()][];
+            for (int i = 0; i < tasksList.size(); i++) {
+                tasksArr[i] = tasksList.get(i).split(",");
+            }
+        } catch (IOException e) {
+            System.out.print("No tasks list file!");
+        }
+
+        return tasksArr;
     }
 
 
