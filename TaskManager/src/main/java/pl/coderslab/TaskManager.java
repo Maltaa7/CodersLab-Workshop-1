@@ -59,7 +59,6 @@ public class TaskManager {
         return tasksArr;
     }
 
-
     private static void performSelectedActions() {
         Scanner scanner = new Scanner(System.in);
         String input;
