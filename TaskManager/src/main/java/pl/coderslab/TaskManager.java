@@ -42,7 +42,6 @@ public class TaskManager {
             System.exit(0);
         }
 
-
         try (Scanner scanner = new Scanner(file)) {
             ArrayList<String> tasksList = new ArrayList<>();
 
