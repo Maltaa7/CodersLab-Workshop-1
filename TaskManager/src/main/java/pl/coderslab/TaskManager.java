@@ -31,10 +31,9 @@ public class TaskManager {
         }
     }
 
-
     public static String[][] loadToArray(String filename) {
         File file = new File(filename);
-        String[][] tasksArr = null;
+        String[] tasks = new String[0];
 
         if (!file.exists()) {
             System.out.print("No tasks list file!");
@@ -42,21 +41,19 @@ public class TaskManager {
         }
 
         try (Scanner scanner = new Scanner(file)) {
-            ArrayList<String> tasksList = new ArrayList<>();
-
             while (scanner.hasNextLine()) {
-                tasksList.add(scanner.nextLine());
-            }
-
-            tasksArr = new String[tasksList.size()][];
-            for (int i = 0; i < tasksList.size(); i++) {
-                tasksArr[i] = tasksList.get(i).split(",");
+                tasks = ArrayUtils.add(tasks, scanner.nextLine());
             }
         } catch (IOException e) {
             System.out.print("No tasks list file!");
         }
 
-        return tasksArr;
+        String[][] tasksArrResult = new String[tasks.length][];
+        for (int i = 0; i < tasks.length; i++) {
+            tasksArrResult[i] = tasks[i].split(",");
+        }
+
+        return tasksArrResult;
     }
 
     private static void performSelectedActions() {
