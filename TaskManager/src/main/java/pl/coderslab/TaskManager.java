@@ -33,8 +33,7 @@ public class TaskManager {
 
     public static String[][] loadToArray(String filename) {
         File file = new File(filename);
-        String[] tasks = new String[0];
-
+        String[][] tasksArr = new String[0][];
         if (!file.exists()) {
             System.out.print("No tasks list file!");
             System.exit(0);
@@ -42,18 +41,13 @@ public class TaskManager {
 
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
-                tasks = ArrayUtils.add(tasks, scanner.nextLine());
+                tasksArr = ArrayUtils.add(tasksArr, scanner.nextLine().split(","));
             }
         } catch (IOException e) {
             System.out.print("No tasks list file!");
         }
 
-        String[][] tasksArrResult = new String[tasks.length][];
-        for (int i = 0; i < tasks.length; i++) {
-            tasksArrResult[i] = tasks[i].split(",");
-        }
-
-        return tasksArrResult;
+        return tasksArr;
     }
 
     private static void performSelectedActions() {
