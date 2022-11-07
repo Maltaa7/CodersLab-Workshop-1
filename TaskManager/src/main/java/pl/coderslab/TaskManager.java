@@ -41,7 +41,7 @@ public class TaskManager {
 
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
-                tasksArr = ArrayUtils.add(tasksArr, scanner.nextLine().split(","));
+                tasksArr = ArrayUtils.add(tasksArr, scanner.nextLine().split(", "));
             }
         } catch (IOException e) {
             System.out.print("No tasks list file!");
